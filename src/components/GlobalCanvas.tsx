@@ -30,7 +30,6 @@ interface IGlobalCanvas extends Omit<any, 'children'> {
   orthographic?: boolean
   onError?: (props: any) => void
   camera?: any
-  // state
   debug?: boolean
   scaleMultiplier?: number
   globalRender?: boolean
@@ -83,10 +82,10 @@ const GlobalCanvasImpl = ({
     })
   }, [scaleMultiplier, globalPriority, globalRender, globalClearDepth])
 
-  // const As = as
+  const As = as
 
   return (
-    <Canvas
+    <As
       id="ScrollRig-canvas"
       // use our own default camera
       camera={{
@@ -116,7 +115,7 @@ const GlobalCanvasImpl = ({
       {typeof children === 'function' ? children(<GlobalChildren />) : <GlobalChildren>{children}</GlobalChildren>}
 
       <ResizeManager />
-    </Canvas>
+    </As>
   )
 }
 
