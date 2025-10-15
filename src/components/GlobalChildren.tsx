@@ -11,6 +11,7 @@ export const GlobalChildren = ({ children }: { children?: ReactNode }) => {
   const gl = useThree((s) => s.gl)
   const canvasChildren = useCanvasStore((state) => state.canvasChildren)
   const scrollRig = useScrollRig()
+  console.log('gl', gl)
 
   useEffect(() => {
     // render empty canvas automatically if all children were removed
