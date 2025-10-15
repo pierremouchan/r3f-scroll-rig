@@ -3,6 +3,7 @@ import { invalidate, useThree } from '@react-three/fiber'
 
 import { useCanvasStore } from '../store'
 import { useScrollRig } from '../hooks/useScrollRig'
+import { WebGPURenderer } from 'three/src/Three.WebGPU'
 
 /**
  * Renders global children from useCanvas hook
@@ -11,7 +12,11 @@ export const GlobalChildren = ({ children }: { children?: ReactNode }) => {
   const gl = useThree((s) => s.gl)
   const canvasChildren = useCanvasStore((state) => state.canvasChildren)
   const scrollRig = useScrollRig()
-  console.log('gl', gl)
+
+  useEffect(() => {
+    console.info('gl is WebGPURenderer:', gl instanceof WebGPURenderer)
+    console.info('gl:', gl)
+  }, [gl])
 
   useEffect(() => {
     // render empty canvas automatically if all children were removed
