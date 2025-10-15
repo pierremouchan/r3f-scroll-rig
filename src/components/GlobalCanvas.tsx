@@ -16,6 +16,7 @@ import { CanvasErrorBoundary } from './CanvasErrorBoundary'
 import { config } from '../config'
 import { version } from '../../package.json'
 import { RenderProps } from '@react-three/fiber/dist/declarations/src/core/renderer'
+import { WebGPURenderer } from 'three/src/Three.WebGPU'
 
 let polyfill: new (callback: ResizeObserverCallback) => ResizeObserver
 if (typeof window !== 'undefined') {
@@ -67,6 +68,7 @@ const GlobalCanvasImpl = ({
     if (debug || typeof qs.debug !== 'undefined') {
       useCanvasStore.setState({ debug: true })
       console.info('@14islands/r3f-scroll-rig@' + version)
+      console.log('gl', gl)
     }
   }, [debug])
 
@@ -93,11 +95,11 @@ const GlobalCanvasImpl = ({
         manual: true,
       }}
       // Some sane defaults
-      // gl={{
-      //   // https://blog.tojicode.com/2013/12/failifmajorperformancecaveat-with-great.html
-      //   failIfMajorPerformanceCaveat: true, // skip webgl if slow device
-      // ...gl,
-      // }}
+      gl={{
+        // https://blog.tojicode.com/2013/12/failifmajorperformancecaveat-with-great.html
+        failIfMajorPerformanceCaveat: true, // skip webgl if slow device
+        ...gl,
+      }}
       // polyfill old iOS safari
       resize={{ scroll: false, debounce: 0, polyfill }}
       // default styles
