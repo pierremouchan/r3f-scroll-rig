@@ -25,7 +25,7 @@ const SmoothScrollbarImpl = (
   }: ISmoothScrollbar,
   ref: any
 ) => {
-  const lenis = useRef<Lenis>()
+  const lenis = useRef<Lenis>(null)
   const preventPointer = useRef(false)
   const globalScrollState = useCanvasStore((s) => s.scroll)
 
@@ -144,7 +144,7 @@ const SmoothScrollbarImpl = (
 
       // expose global scrollTo and onScroll function to subscribe to scroll events
       useCanvasStore.setState({
-        __lenis: _lenis,
+        __lenis: _lenis || undefined,
         scrollTo: (...args) => {
           _lenis?.scrollTo(...args)
         },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, MutableRefObject, ReactNode } from 'react'
+import React, { useEffect, useState, useRef, MutableRefObject, ReactNode, RefObject } from 'react'
 import { Scene, Group } from 'three'
 import { useFrame, createPortal, useThree } from '@react-three/fiber'
 
@@ -11,7 +11,7 @@ import { useTracker } from '../hooks/useTracker'
 import type { ScrollState } from '../hooks/useTrackerTypes'
 
 export interface ScrollSceneChildProps {
-  track: MutableRefObject<HTMLElement>
+  track: RefObject<HTMLElement>
   margin: number
   priority: number
   scale: vec3
@@ -57,7 +57,7 @@ function ScrollScene({
   ...props
 }: IScrollScene) {
   const globalScene = useThree((s) => s.scene)
-  const contentRef = useRef<Group>()
+  const contentRef = useRef<Group>(null)
   const [portalScene] = useState<Scene | null>(scene || (scissor ? new Scene() : null))
   const { requestRender, renderScissor } = useScrollRig()
   const globalRender = useCanvasStore((state) => state.globalRender)

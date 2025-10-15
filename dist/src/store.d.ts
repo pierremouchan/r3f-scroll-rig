@@ -21,5 +21,5 @@ interface ScrollRigStore {
     scrollTo: (target: any) => void;
     onScroll: (cb: ScrollCallback) => () => void;
 }
-declare const useCanvasStore: import("zustand").UseBoundStore<ScrollRigStore, import("zustand").StoreApi<ScrollRigStore>>;
+declare const useCanvasStore: import("zustand").UseBoundStore<import("zustand").StoreApi<ScrollRigStore>>;
 export { useCanvasStore };

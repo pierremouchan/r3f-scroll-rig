@@ -1,6 +1,5 @@
-import { ReactNode } from 'react';
-import { Props } from '@react-three/fiber';
-interface IGlobalCanvas extends Omit<Props, 'children'> {
+import React, { ReactNode } from 'react';
+interface IGlobalCanvas extends Omit<any, 'children'> {
     children?: ReactNode | ((globalChildren: ReactNode) => ReactNode);
     as?: any;
     orthographic?: boolean;
@@ -12,5 +11,5 @@ interface IGlobalCanvas extends Omit<Props, 'children'> {
     globalPriority?: number;
     globalClearDepth?: boolean;
 }
-export declare const GlobalCanvas: ({ children, onError, ...props }: IGlobalCanvas) => JSX.Element;
+export declare const GlobalCanvas: ({ children, onError, ...props }: IGlobalCanvas) => React.JSX.Element;
 export {};

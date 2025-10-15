@@ -1,7 +1,7 @@
 import React, { ReactNode, startTransition } from 'react'
-import { Canvas, Props } from '@react-three/fiber'
+import { Canvas, GLProps } from '@react-three/fiber'
 import { ResizeObserver as Polyfill } from '@juggle/resize-observer'
-import { parse } from 'query-string'
+import parse from 'query-string'
 
 import { useLayoutEffect } from '../hooks/useIsomorphicLayoutEffect'
 import { useCanvasStore } from '../store'
@@ -15,13 +15,15 @@ import { CanvasErrorBoundary } from './CanvasErrorBoundary'
 
 import { config } from '../config'
 import { version } from '../../package.json'
+import { RenderProps } from '@react-three/fiber/dist/declarations/src/core/renderer'
 
 let polyfill: new (callback: ResizeObserverCallback) => ResizeObserver
 if (typeof window !== 'undefined') {
   polyfill = window.ResizeObserver || Polyfill
 }
 
-interface IGlobalCanvas extends Omit<Props, 'children'> {
+// TODO: any add type
+interface IGlobalCanvas extends Omit<any, 'children'> {
   children?: ReactNode | ((globalChildren: ReactNode) => ReactNode)
   as?: any
   orthographic?: boolean
@@ -59,7 +61,7 @@ const GlobalCanvasImpl = ({
     }
 
     // Querystring overridess
-    const qs = parse(window.location.search)
+    const qs = parse.parse(window.location.search)
 
     // show debug statements
     if (debug || typeof qs.debug !== 'undefined') {

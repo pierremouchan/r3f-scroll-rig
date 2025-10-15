@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useMemo, useImperativeHandle } from 'react'
+import React, { useRef, forwardRef, useMemo, useImperativeHandle, JSX } from 'react'
 import { OrthographicCamera as OrthographicCameraImpl } from 'three'
 import { useThree } from '@react-three/fiber'
 

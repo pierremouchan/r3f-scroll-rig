@@ -40,7 +40,7 @@ function useTextureLoader() {
 
 function useImageAsTexture(
   imgRef: RefObject<HTMLImageElement>,
-  { initTexture = true, premultiplyAlpha = 'default' } = {}
+  { initTexture = true, premultiplyAlpha: PremultiplyAlpha = 'none' as PremultiplyAlpha } = {}
 ) {
   const gl = useThree((s) => s.gl)
   const size = useWindowSize()
@@ -92,7 +92,7 @@ function useImageAsTexture(
     if (loader instanceof ImageBitmapLoader) {
       loader.setOptions({
         colorSpaceConversion: 'none',
-        premultiplyAlpha, // "none" increases blocking time in lighthouse
+        premultiplyAlpha: PremultiplyAlpha, // "none" increases blocking time in lighthouse
         imageOrientation: 'flipY',
       })
       // Add webp to Accept header if supported

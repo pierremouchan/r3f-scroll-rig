@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode } from 'react'
+import { ForwardedRef, forwardRef, ReactNode } from 'react'
 import { useCanvas } from '../hooks/useCanvas'
 
 import { ScrollRigState } from '../hooks/useScrollRig'
@@ -10,11 +10,13 @@ interface IUseCanvas {
   [key: string]: any // Any props to reactively tunnel to the child
 }
 
-const UseCanvas = forwardRef(({ children, id, dispose = true, ...props }: IUseCanvas, ref) => {
-  if (!children) return null
-  // auto update canvas with all props
-  useCanvas(children, { ...props, id, ref }, { key: id, dispose })
-  return null
-})
+const UseCanvas = forwardRef(
+  ({ children, id, dispose = true, ...props }: Omit<IUseCanvas, 'ref'>, ref: ForwardedRef<unknown>) => {
+    if (!children) return null
+    // auto update canvas with all props
+    useCanvas(children, { ...props, id, ref }, { key: id, dispose })
+    return null
+  }
+)
 
 export { UseCanvas }
