@@ -41,7 +41,6 @@ interface IGlobalCanvas extends Omit<any, 'children'> {
 const GlobalCanvasImpl = ({
   children,
   as = Canvas,
-  gl,
   style,
   orthographic,
   camera,
@@ -68,7 +67,6 @@ const GlobalCanvasImpl = ({
     if (debug || typeof qs.debug !== 'undefined') {
       useCanvasStore.setState({ debug: true })
       console.info('@14islands/r3f-scroll-rig@' + version)
-      console.log('gl', gl)
     }
   }, [debug])
 
@@ -85,10 +83,10 @@ const GlobalCanvasImpl = ({
     })
   }, [scaleMultiplier, globalPriority, globalRender, globalClearDepth])
 
-  const As = as
+  // const As = as
 
   return (
-    <As
+    <Canvas
       id="ScrollRig-canvas"
       // use our own default camera
       camera={{
@@ -118,7 +116,7 @@ const GlobalCanvasImpl = ({
       {typeof children === 'function' ? children(<GlobalChildren />) : <GlobalChildren>{children}</GlobalChildren>}
 
       <ResizeManager />
-    </As>
+    </Canvas>
   )
 }
 
