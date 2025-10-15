@@ -14,11 +14,6 @@ export const GlobalChildren = ({ children }: { children?: ReactNode }) => {
   const scrollRig = useScrollRig()
 
   useEffect(() => {
-    console.info('gl is WebGPURenderer:', gl instanceof WebGPURenderer)
-    console.info('gl:', gl)
-  }, [gl])
-
-  useEffect(() => {
     // render empty canvas automatically if all children were removed
     if (!Object.keys(canvasChildren).length) {
       scrollRig.debug && console.log('GlobalRenderer', 'auto render empty canvas')
